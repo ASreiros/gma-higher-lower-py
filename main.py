@@ -11,21 +11,16 @@ def get_data(lst):
 
 
 def compare(value_a, value_b):
+    """Takes account values, user input and return if input is correct"""
     flag = False
     while not flag:
         answer = input("Who has more followers? Type 'A' or 'B':").lower()
         if answer == "a":
             flag = True
-            if value_a >= value_b:
-                return True
-            else:
-                return False
+            return value_a >= value_b
         elif answer == "b":
             flag = True
-            if value_a <= value_b:
-                return True
-            else:
-                return False
+            return value_a <= value_b
         else:
             print("That is not an available choice")
 
@@ -56,11 +51,13 @@ info_a = {}
 [info_b, info] = get_data(info)
 
 while correct:
+    if len(info) < 2:
+        info = copy.deepcopy(game_data.data)
     info_a = info_b
     [info_b, info] = get_data(info)
     if print_compare(info_a, info_b):
         scores += 1
-        print(f"Correct! {info_a['name']} is indeed has more followers than {info_b['name']}")
+        print(f"Correct! {info_a['name']} is indeed has more followers than {info_b['name']}. Your current score is {scores}")
         print("----------------------------------------------")
     else:
         print(f"Sorry, that's wrong. Final score {scores}")
